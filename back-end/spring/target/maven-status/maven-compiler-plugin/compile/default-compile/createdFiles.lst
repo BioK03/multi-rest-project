@@ -1,0 +1,5 @@
+application\configs\DatabaseConfig.class
+application\controllers\EventController.class
+application\models\Event.class
+application\models\EventDao.class
+application\Application.class
