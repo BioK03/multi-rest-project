@@ -1,5 +1,7 @@
 application\configs\DatabaseConfig.class
+application\models\EventDao.class
+application\configs\CORSFilter.class
 application\controllers\EventController.class
 application\models\Event.class
-application\models\EventDao.class
 application\Application.class
+application\models\EventList.class

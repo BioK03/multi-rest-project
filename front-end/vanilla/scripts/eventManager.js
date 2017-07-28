@@ -2,18 +2,18 @@ var eventList = [];
 
 var eventManager = {
   fetchEvents() {
-    fetch.fetchUrl("GET", "http://localhost:8080/events", eventManager.printEvents, null);
+    fetch.fetchUrl("GET", "/events", eventManager.printEvents, null);
   },
   printEvents(events) {
     eventList = JSON.parse(events);
     var layer = createLayer();
-    for (var i = 0; i < eventList.length; i++) {
-      addPointerToLayer(eventList[i], layer);
+    for (var i = 0; i < eventList.events.length; i++) {
+      addPointerToLayer(eventList.events[i], layer);
     }
     addLayerToMap(layer);
   },
   createEvent(event) {
-    fetch.fetchUrl("GET", "http://localhost:8080/events/create" + event, eventManager.printEvents);
+    fetch.fetchUrl("POST", "/events/create", eventManager.printEvents, JSON.stringify(event));
   }
 };
 

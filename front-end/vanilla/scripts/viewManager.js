@@ -206,7 +206,20 @@ var formManager = {
       }
     }
 
-    var event = "?name=" + document.getElementById("name").value + "&description=" + document.getElementById("description").value + "&creator=" + document.getElementById("creator").value + "&email=" + document.getElementById("email").value + "&place=" + document.getElementById("place").value + "&latitude=" + parseFloat(document.getElementById("latitude").value) + "&longitude=" + parseFloat(document.getElementById("longitude").value) + "&theme=" + document.getElementById("theme").value + "&color=" + getThemeColor(document.getElementById("theme").value) + "&icon=" + getIcon(document.getElementById("theme").value) + "&date=" + dateString + "&hour=" + timeString;
+    var event = {
+      name: document.getElementById("name").value,
+      description: document.getElementById("description").value,
+      creator: document.getElementById("creator").value,
+      email: document.getElementById("email").value,
+      place: document.getElementById("place").value,
+      latitude: parseFloat(document.getElementById("latitude").value),
+      longitude: parseFloat(document.getElementById("longitude").value),
+      theme: document.getElementById("theme").value,
+      color: getThemeColor(document.getElementById("theme").value),
+      icon: getIcon(document.getElementById("theme").value),
+      date: dateString,
+      hour: timeString
+    };
     eventManager.createEvent(event);
     formManager.resetForm();
     sideManager.hide();

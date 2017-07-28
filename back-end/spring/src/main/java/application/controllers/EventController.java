@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.*;
 
 import application.models.Event;
 import application.models.EventDao;
+import application.models.EventList;
 
 /**
  * Class EventController
@@ -30,21 +31,8 @@ public class EventController {
    */
   @RequestMapping(value="/create")
   @ResponseBody
-  public ResponseEntity<List<Event>> create(
-    @RequestParam(value="name") String name, 
-    @RequestParam(value="description") String description, 
-    @RequestParam(value="creator") String creator, 
-    @RequestParam(value="email") String email, 
-    @RequestParam(value="place") String place,
-    @RequestParam(value="latitude") Double latitude, 
-    @RequestParam(value="longitude") Double longitude, 
-    @RequestParam(value="theme") String theme, 
-    @RequestParam(value="color") String color,
-    @RequestParam(value="icon") String icon, 
-    @RequestParam(value="date") String date, 
-    @RequestParam(value="hour") String hour) {
-    
-    Event event = new Event(name, description, creator, email, place, latitude, longitude, theme, color, icon, date, hour);
+  public ResponseEntity<EventList> create(@RequestBody Event event)
+ {
     eventDao.create(event);
 
     return getAll();
@@ -52,8 +40,10 @@ public class EventController {
   
   @RequestMapping(value="")
   @ResponseBody
-  public ResponseEntity<List<Event>> getAll() {
-    return new ResponseEntity<>(eventDao.getAll(), HttpStatus.OK);
+  public ResponseEntity<EventList> getAll() {
+    List<Event> events = eventDao.getAll();
+    EventList el = new EventList(events);
+    return new ResponseEntity<>(el, HttpStatus.OK);
   }
 
   @RequestMapping(method = RequestMethod.OPTIONS)

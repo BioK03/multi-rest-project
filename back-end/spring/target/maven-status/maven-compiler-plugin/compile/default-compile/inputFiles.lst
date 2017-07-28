@@ -1,5 +1,7 @@
 D:\w\others\multi-rest-project\back-end\spring\src\main\java\application\models\Event.java
 D:\w\others\multi-rest-project\back-end\spring\src\main\java\application\configs\DatabaseConfig.java
+D:\w\others\multi-rest-project\back-end\spring\src\main\java\application\configs\CORSFilter.java
 D:\w\others\multi-rest-project\back-end\spring\src\main\java\application\models\EventDao.java
+D:\w\others\multi-rest-project\back-end\spring\src\main\java\application\models\EventList.java
 D:\w\others\multi-rest-project\back-end\spring\src\main\java\application\Application.java
 D:\w\others\multi-rest-project\back-end\spring\src\main\java\application\controllers\EventController.java
