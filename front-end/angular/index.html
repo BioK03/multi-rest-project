@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8" />
+
+    <link rel="stylesheet" href="../resources/lib/ionicons/css/ionicons.min.css" />
+    <link rel="stylesheet" href="../resources/lib/leaflet/leaflet.css" />
+
+    <link rel="stylesheet" href="styles/styles.css" />
+
+    <script type="text/javascript" src="bower_components/angular/angular.js"></script>
+</head>
+
+<body>
+    <div ng-app="angular" ng-controller="mainCtrl" class="fullSize">
+        <map class="fullSize"></map>
+        <img id="logo" src="../resources/img/logo.png" />
+        <span id="evtButton">
+            <i class="icon ion-plus"></i>
+        </span>
+    </div>
+
+    <!-- ANGULAR -->
+    <script type="text/javascript" src="app/app.js"></script>
+    <script type="text/javascript" src="app/services.js"></script>
+    <script type="text/javascript" src="app/controllers.js"></script>
+    <script type="text/javascript" src="app/directives.js"></script>
+
+    <!-- LEAFLET -->
+    <script type="text/javascript" src="../resources/lib/leaflet/leaflet.js"></script>
+
+</body>
+
+</html>

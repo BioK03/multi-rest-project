@@ -9,7 +9,7 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 app.use(cors());
 
-var port = process.env.PORT || 3000;
+var port = 9090;
 
 
 

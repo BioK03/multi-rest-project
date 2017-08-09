@@ -11,6 +11,12 @@
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+Route::get('/events', ['middleware' => 'cors', function () {
+    if(DB::connection()->getDatabaseName())
+    {
+        $events = DB::table('events')->get();
+    }
+    return response()->json([
+        'events' => $events
+    ]);
+}]);

@@ -47,7 +47,7 @@ class EventDao {
         '".$event->getPlace()."', '".$event->getTheme()."', '".$event->getColor()."', '".$event->getIcon()."', '".$event->getDate()."', '".$event->getHour()."')";
 
         if (!$con->query($sql) === TRUE) {
-            echo "Error: " . $sql . "<br>" . $conn->error;
+            echo "Error: " . $sql . "<br>" . $con->error;
         }
 
         $sql="SELECT * FROM events";
