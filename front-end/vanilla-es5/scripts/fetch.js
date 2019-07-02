@@ -12,8 +12,6 @@ var fetch = {
       }
     };
 
-    console.log(url);
-
     oReq.open(method, url, true);
     if (body != null) {
       oReq.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
