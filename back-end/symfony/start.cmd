@@ -1,1 +1,1 @@
-php bin/console server:run 0.0.0.0:9090
+php bin/console server:run 0.0.0.0:9000

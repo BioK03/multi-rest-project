@@ -22,7 +22,7 @@ evtButton.addEventListener("click", function() {
 });
 
 var templates = {
-  createEvent() {
+  createEvent: function() {
     return `
     <h1>Create an event</h1>
     <form onSubmit="return false;">
@@ -55,6 +55,7 @@ var templates = {
           <i class="icon ion-ios-location"></i>
           Address
         </label><br/>
+        <span id="selected_place">No corresponding address found</span><br/>
         <input type="hidden" id="latitude" name="latitude"/>
         <input type="hidden" id="longitude" name="longitude"/>
 
@@ -85,7 +86,7 @@ var templates = {
     </form>
     `;
   },
-  setEvent(event) {
+  setEvent: function(event) {
     return `<h1 style='background-color: ` + getHexFromColorName(getThemeColor(event.theme)) + `'>
       <i class='icon ` + getIcon(event.theme) + `'></i> ` + event.name + `<br/>` +
       `<span>` + event.theme + `</span>` +
@@ -115,11 +116,11 @@ function printDatetime() {
 var sideManager = {
   deployed: false,
   lastDeployed: "",
-  setContent(template, html) {
+  setContent: function(template, html) {
     sideManager.lastDeployed = template;
     sideContainer.innerHTML = html;
   },
-  deploy() {
+  deploy: function() {
     if (!sideManager.deployed) {
       mainContainer.style.width = "60%";
       sideContainer.style.left = "60%";
@@ -148,18 +149,21 @@ var sideManager = {
           printDatetime();
         });
 
-        autocomplete = new google.maps.places.Autocomplete(document.getElementById('place'), { types: ['geocode'] });
-        autocomplete.addListener('place_changed', function() {
-          var place = autocomplete.getPlace();
-
-          if (place.geometry && place.geometry.location) {
-            document.getElementById("latitude").value = place.geometry.location.lat();
-            document.getElementById("longitude").value = place.geometry.location.lng();
-            map.setView([place.geometry.location.lat(), place.geometry.location.lng()], 13);
-          } else {
-            alert("This address is incorrect :(\n Please select a more precise address");
-            document.getElementById('place').value = "";
-          }
+        document.getElementById('place').addEventListener('keyup', function(e) {
+          if (!e.target.value) { return; }
+          fetch.fetchExternalUrl("GET", 'https://api.tomtom.com/search/2/search/' + encodeURI(e.target.value) + '.json?key=KFbWU7StNpQZ2CzfcvY0K2hFtoD9Q0wL', function(places) {
+            places = JSON.parse(places).results;
+            if (!places.length) {
+              document.getElementById('selected_place').innerHTML = 'No corresponding address found';
+              document.getElementById("latitude").value = null;
+              document.getElementById("longitude").value = null;
+            } else {
+              document.getElementById('selected_place').innerHTML = places[0].address.freeformAddress;
+              document.getElementById("latitude").value = places[0].position.lat;
+              document.getElementById("longitude").value = places[0].position.lon;
+              map.setView([places[0].position.lat, places[0].position.lon], 13);
+            }
+          }, null);
         });
 
         printDatetime();
@@ -170,7 +174,7 @@ var sideManager = {
       }
     }
   },
-  hide() {
+  hide: function() {
     if (sideManager.deployed) {
       mainContainer.style.width = "100%";
       sideContainer.style.left = "100%";
@@ -180,7 +184,7 @@ var sideManager = {
       sideManager.deployed = false;
     }
   },
-  toggle() {
+  toggle: function() {
     if (sideManager.deployed) {
       sideManager.hide();
     } else {
@@ -190,7 +194,7 @@ var sideManager = {
 };
 
 var formManager = {
-  formSubmitManager() {
+  formSubmitManager: function() {
     var ids = {
       "creator": "Your public name",
       "email": "Your email address",
@@ -225,7 +229,7 @@ var formManager = {
     sideManager.hide();
     return false;
   },
-  resetForm() {
+  resetForm: function() {
     var ids = ["creator", "email", "name", "description", "place", "latitude", "longitude"];
     for (var i = 0; i < ids.length; i++) {
       document.getElementById(ids[i]).value = "";

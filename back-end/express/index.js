@@ -9,9 +9,7 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 app.use(cors());
 
-var port = 9090;
-
-
+var port = 9000;
 
 app.use('/', router);
 

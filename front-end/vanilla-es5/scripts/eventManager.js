@@ -1,10 +1,10 @@
 var eventList = [];
 
 var eventManager = {
-  fetchEvents() {
+  fetchEvents: function() {
     fetch.fetchUrl("GET", "/events", eventManager.printEvents, null);
   },
-  printEvents(events) {
+  printEvents: function(events) {
     eventList = JSON.parse(events);
     var layer = createLayer();
     for (var i = 0; i < eventList.events.length; i++) {
@@ -12,7 +12,7 @@ var eventManager = {
     }
     addLayerToMap(layer);
   },
-  createEvent(event) {
+  createEvent: function(event) {
     fetch.fetchUrl("POST", "/events/create", eventManager.printEvents, JSON.stringify(event));
   }
 };
@@ -20,7 +20,6 @@ var eventManager = {
 (function() {
   eventManager.fetchEvents();
 })();
-
 
 function generateThemeSelect() {
   var themes = {
